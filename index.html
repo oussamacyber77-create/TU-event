@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>TU Events</title>
+    <!-- Tajawal font -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Main Style -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-tu">
+
+    <!-- Desktop Fallback Screen -->
+    <div id="desktop-fallback" class="fallback-container hidden">
+        <div class="fallback-content">
+            <div class="fallback-logo"><img src="images/tu events logo.svg"></div>
+            <h1 class="fallback-title">Mobile Only Access</h1>
+            <p class="fallback-text">هذه الخدمة متاحة فقط على الهواتف المحمولة لتقديم أفضل تجربة (App-like UI). يرجى فتح الموقع من هاتفك.</p>
+            <div class="qr-container">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://tu-events.example.com" alt="QR Code" class="qr-code">
+            </div>
+            <p class="fallback-hint">قم بمسح الكود أعلاه للمتابعة</p>
+        </div>
+    </div>
+
+    <!-- Mobile App Container -->
+    <div id="mobile-app" class="app-container hidden">
+        
+        <!-- Header -->
+        <header class="app-header">
+            <div id="header-tu-logo" class="header-logo"><img src="images/tu events logo.svg" alt="TU Logo" class="brand-img"><span></span></div>
+            <div id="header-d360-logo" class="header-logo hidden">
+                <img src="images/tu logo.svg" alt="TU Logo" class="TU-img">
+                <i data-lucide="x" class="cross-icon"></i>
+                <img src="images/D360_Bank.svg" alt="D360 Logo" class="colab-img">
+            </div>
+            <div id="header-mobily-logo" class="header-logo hidden">
+                <img src="images/tu logo.svg" alt="TU Logo" class="TU-img">
+                <i data-lucide="x" class="cross-icon"></i>
+                <img src="images/Mobily_Logo.svg" alt="Mobily Logo" class="colab-img" style="border-radius: 8px;">
+            </div>
+        </header>
+
+        <!-- Main Content Area -->
+        <main class="app-main">
+            
+            <!-- View 1: Main Events (Home) -->
+            <section id="view-main" class="view active-view">
+                <h2 class="view-title">الأحداث الحالية</h2>
+                
+                <div class="event-card">
+                    <img src="images/x.png" alt="Event Cover" class="event-image">
+                    <div class="event-details">
+                        <h3>توقع السعر مع D360</h3>
+                        <div class="countdown-timer">
+                            <i data-lucide="clock"></i>
+                            <span class="timer-text">57 يوم و 17 ساعة و 05 دقيقة و 27 ثانية</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="goToEvent()">إطلاع على الحدث</button>
+                    </div>
+                </div>
+
+                <div class="event-card">
+                    <img src="images/x2.png" alt="Event Cover Mobily" class="event-image">
+                    <div class="event-details">
+                        <h3>فعاليات Mobily</h3>
+                        <div class="countdown-timer">
+                            <i data-lucide="clock"></i>
+                            <span class="timer-text">15 يوم و 08 ساعة و 22 دقيقة</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="goToMobilyEvent()">إطلاع على الحدث</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- View 2: D360 Event Intro -->
+            <section id="view-event-intro" class="view hidden">
+                <h2 class="view-title">فعالية D360</h2>
+                
+                <div class="event-card">
+                    <img src="images/Tumb.jpg" alt="Event Intro" class="event-image">
+                    <div class="event-details">
+                        <h3>توقع سعر المنتج</h3>
+                        <p class="event-description">مجموعة منتجات، توقع سعرها واحصل عليها مجاناً أو اربح كود خصم!</p>
+                        <div class="countdown-timer">
+                            <i data-lucide="clock"></i>
+                            <span class="timer-text">29 يوم و 10 ساعة و 55 دقيقة و 07 ثانية</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="openRulesPopup()">مشاركة</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- View: Mobily Event Intro -->
+            <section id="view-mobily-intro" class="view hidden">
+                <h2 class="view-title">فعالية Mobily</h2>
+                
+                <div class="event-card">
+                    <img src="images/x2.png" alt="Event Intro" class="event-image">
+                    <div class="event-details">
+                        <h3>قريباً...</h3>
+                        <p class="event-description">تفاصيل وباقات فعالية Mobily ستكون متاحة قريباً.</p>
+                        <button class="btn btn-primary" onclick="resetToHome()">العودة للرئيسية</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- View 3: Products List -->
+            <section id="view-products" class="view hidden">
+                <h2 class="view-title">المنتجات المتاحة للتوقع</h2>
+                
+                <div class="products-grid">
+                    <!-- Product 1 -->
+                    <div class="product-card" onclick="openProduct(1)">
+                        <div class="product-img-wrap">
+                            <img src="images/TU Apple Watch.jpg" alt="Apple Watch">
+                        </div>
+                        <div class="product-info">
+                            <h4>ساعة آبل نسخة TU</h4>
+                            <div class="product-countdown">
+                                <i data-lucide="timer"></i> الفرز بعد 2 يوم و 6 ساعة
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 2 -->
+                    <div class="product-card" onclick="openProduct(2)">
+                        <div class="product-img-wrap">
+                            <img src="images/box.png" alt="Mystery Box">
+                        </div>
+                        <div class="product-info">
+                            <h4>صندوق عشوائي</h4>
+                            <div class="product-countdown">
+                                <i data-lucide="timer"></i> الفرز بعد 5 يوم و 12 ساعة
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product 3 -->
+                    <div class="product-card" onclick="openProduct(3)">
+                        <div class="product-img-wrap">
+                            <img src="images/tshirt.webp" alt="TU Tshirt">
+                        </div>
+                        <div class="product-info">
+                            <h4>تيشرت TU حصري</h4>
+                            <div class="product-countdown">
+                                <i data-lucide="timer"></i> الفرز بعد 1 يوم و 4 ساعة
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+
+        <!-- Popups & Overlays -->
+        
+        <!-- Auth Popup -->
+        <div id="auth-popup" class="overlay active">
+            <div class="popup-box">
+                <div class="popup-header">
+                    <h3>أهلاً بك في TU Events</h3>
+                    <p>يرجى إدخال بياناتك للمشاركة أو المتابعة كضيف</p>
+                </div>
+                <div class="popup-body">
+                    <div class="input-group">
+                        <label>الاسم</label>
+                        <input type="text" id="auth-name" placeholder="أدخل اسمك">
+                    </div>
+                    <div class="input-group">
+                        <label>البريد الإلكتروني</label>
+                        <input type="email" id="auth-email" placeholder="أدخل بريدك الإلكتروني">
+                    </div>
+                </div>
+                <div class="popup-footer">
+                    <button class="btn btn-primary" onclick="closeAuth()">دخول</button>
+                    <button class="btn btn-outline mt-3" onclick="closeAuth()">المتابعة دون تسجيل</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rules Popup -->
+        <div id="rules-popup" class="overlay hidden">
+            <div class="popup-box">
+                <div class="popup-header">
+                    <h3>كيفية المشاركة</h3>
+                </div>
+                <div class="popup-body">
+                    <p class="rules-text">هذا الحدث عبارة عن مجموعة منتجات يجب عليك توقع سعرها. عند انتهاء الوقت، أقرب شخص للسعر الأصلي يحصل على المنتج مجاناً.</p>
+                    <p class="rules-text">لكن لا تقلق! بمجرد المشاركة، إذا توقعت سعراً قريباً، ستحصل فوراً على كود خصم خاص من متجر نون.</p>
+                </div>
+                <div class="popup-footer">
+                    <button class="btn btn-primary" onclick="acceptRules()">متابعة</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Guess Product Popup -->
+        <div id="guess-popup" class="overlay hidden">
+            <div class="popup-box bottom-sheet">
+                <div class="sheet-handle" onclick="closePopup('guess-popup')"></div>
+                <div class="guess-product-card">
+                    <img id="guess-prod-img" src="" alt="Product">
+                    <div class="guess-prod-details">
+                        <h3 id="guess-prod-title">اسم المنتج</h3>
+                        <p class="desc">توقع السعر واكسب المنتج أو كود خصم!</p>
+                        <div class="product-countdown small-cnt">
+                            <i data-lucide="timer"></i> الفرز بعد 2 يوم و 6 ساعة
+                        </div>
+                    </div>
+                </div>
+                <div class="popup-body">
+                    <div class="input-group price-input">
+                        <label>أعطنا توقعك للسعر (ريال سعودي)</label>
+                        <input type="number" id="guess-price" placeholder="مثال: 1500">
+                    </div>
+                </div>
+                <div class="popup-footer">
+                    <button class="btn btn-primary btn-large" onclick="submitGuess()">أرسل التوقع</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Popup -->
+        <div id="loading-popup" class="overlay hidden">
+            <div class="popup-box align-center" style="max-width: 280px; padding: 2.5rem 2rem;">
+                <div class="loader"></div>
+                <h3 style="margin-top: 1.5rem; font-size: 1.2rem;">جاري التحقق...</h3>
+            </div>
+        </div>
+
+        <!-- Success Popup -->
+        <div id="success-popup" class="overlay hidden">
+            <div class="popup-box">
+                <div class="icon-success"><i data-lucide="party-popper"></i></div>
+                <div class="popup-header">
+                    <h3>مبروك! توقعك قريب جداً</h3>
+                </div>
+                <div class="popup-body align-center">
+                    <p>لقد حصلت على كوبون خاص من متجر نون!</p>
+                    <p class="small-text">للحصول على الكود، أرسل معرف حساب D360 الخاص بك، أو قم بتسجيل حساب مجاناً الآن.</p>
+                </div>
+                <div class="popup-footer">
+                    <div id="submit-id-section" class="hidden">
+                        <div class="input-group">
+                            <label>معرّف D360</label>
+                            <input type="text" id="d360-id" placeholder="أدخل المعرف">
+                        </div>
+                        <div class="input-group">
+                            <label>البريد الإلكتروني (لتلقي الكود)</label>
+                            <input type="email" id="d360-email" placeholder="mail@example.com">
+                        </div>
+                        <button class="btn btn-primary mb-3" onclick="sendId()">إرسال</button>
+                    </div>
+
+                    <div id="success-buttons">
+                        <button class="btn btn-primary" onclick="showIdSubmission()">أرسل المعرّف (D360 ID)</button>
+                        <button class="btn btn-outline mt-3" onclick="openDownloadPopup()">سجل مجاناً</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Download Popup -->
+        <div id="download-popup" class="overlay hidden">
+            <div class="popup-box">
+                <div class="popup-header">
+                    <h3>حمل التطبيق الآن</h3>
+                    <p>لتسجيل حساب مجاني والحصول على الكوبون</p>
+                </div>
+                <div class="popup-body">
+                    <a href="https://apps.apple.com/sa/app/d360-bank/id1667558506" target="_blank" class="btn btn-primary mb-3" style="background:#000; color:#fff; border: 2px solid #000;">
+                        <i data-lucide="apple" style="margin-left: 8px;"></i> App Store
+                    </a>
+                    <a href="https://play.google.com/store/apps/details?id=silicon.android.app&pcampaignid=web_share" target="_blank" class="btn btn-outline" style="border: 2px solid #A0A0A0; color:#2B2B2B;">
+                        <i data-lucide="play" style="margin-left: 8px;"></i> Google Play
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Final Message Popup -->
+        <div id="final-popup" class="overlay hidden">
+            <div class="popup-box align-center">
+                <div class="icon-success"><i data-lucide="mail-check"></i></div>
+                <div class="popup-header" style="margin-bottom: 0;">
+                    <h3 style="margin-bottom: 1rem;">تم الإرسال بنجاح</h3>
+                    <p class="rules-text" style="font-size: 0.95rem; margin-bottom: 0;">سيقوم الفريق بمراجعة المعرف وإرسال الكوبون عبر الإيميل في غضون ساعات فقط.</p>
+                </div>
+                <div class="popup-footer mt-3">
+                    <button class="btn btn-primary" onclick="closePopup('final-popup')">حسناً</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Script -->
+    <script src="app.js"></script>
+</body>
+</html>
