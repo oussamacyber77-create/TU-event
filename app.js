@@ -24,7 +24,11 @@ function checkDeviceAccess() {
 }
 
 // Run on load
-document.addEventListener('DOMContentLoaded', checkDeviceAccess);
+document.addEventListener('DOMContentLoaded', () => {
+    checkDeviceAccess();
+    // Force scroll to top on initial load
+    setTimeout(() => window.scrollTo(0, 0), 100);
+});
 // Also run on resize to adapt immediately if testing responsive mode
 window.addEventListener('resize', checkDeviceAccess);
 
@@ -119,6 +123,9 @@ function switchView(viewId, pushToHistory = true) {
     
     // Show target view
     setTimeout(() => {
+        // Reset scroll position to top when navigating
+        window.scrollTo(0, 0);
+        
         const target = document.getElementById(viewId);
         if(target) {
             target.classList.remove('hidden');
